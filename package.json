@@ -1,7 +1,11 @@
 {
   "name": "vite-project",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.1",
+  "author": {
+    "name": "ottocsb",
+    "url": "https://github.com/ottocsb"
+  },
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -9,17 +13,17 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "vue": "^3.2.37"
+    "vue": "^3.2.40"
   },
   "devDependencies": {
     "stylus": "^0.59.0",
     "axios": "^1.1.2",
-    "@vitejs/plugin-vue": "^3.1.0",
-    "typescript": "^4.6.4",
-    "@types/node": "^18.8.4",
+    "@vitejs/plugin-vue": "^3.1.2",
+    "typescript": "^4.8.4",
+    "@types/node": "^18.8.5",
     "vite": "^3.1.0",
-    "vue-tsc": "^1.0.3",
-    "vue-router": "^4.0.12",
+    "vue-tsc": "^1.0.7",
+    "vue-router": "^4.1.5",
     "pinia": "^2.0.0-rc.10",
     "element-plus": "^2.2.17"
   }
