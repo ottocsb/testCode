@@ -1,5 +1,5 @@
 <template></template>
 
-<script setup></script>
+<script setup lang='ts'></script>
 
 <style scoped></style>

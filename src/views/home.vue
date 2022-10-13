@@ -1,6 +1,6 @@
 <template>
   <div>
-    <button @click="handleClick">修改状态数据</button>
+    <button @click='handleClick(5,"李四")'>修改状态数据</button>
     <!-- 模板内不需要加.value -->
     <p>{{ store.name }}</p>
     <!-- computed获取 -->
@@ -11,7 +11,7 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script setup lang='ts'>
 import { computed } from 'vue'
 import axios from '../utils/axios'
 import { useStore } from '@/stores/index.ts'
@@ -24,16 +24,27 @@ const store = useStore()
 const name = computed(() => store.name)
 // 解构并使数据具有响应式
 const { counter } = storeToRefs(store)
+//箭头函数 click事件
+const handleClick = (res:number,name:string) => {
+  // 修改状态
+  console.log(res,name)
+  store.$state = { counter: res, name: name }
+}
+
 
 // 点击修改状态数据;
-function handleClick() {
-  //重置状态
-  store.$reset()
-  setTimeout(() => {
-    // 修改状态
-    store.$state = { counter: 999, name: '李四' }
-  }, 1000)
-}
+// function handleClick() {
+//   //重置状态
+//   store.$reset()
+//   setTimeout(() => {
+//     // 修改状态
+//     store.$state = { counter: 999, name: '李四' }
+//   }, 1000)
+// }
+
+let a: number = 1
+let b: [number, string?] = [1, '2']
+console.log(a, b)
 
 axios
   .get('/users/XPoet')
