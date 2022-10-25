@@ -1,23 +1,30 @@
 <template>
   <div v-if='isOver'>
-    <button  @click='startGame'>开 始 游 戏</button>
-    <div><span>分数：{{ score }}</span></div>
+    <button @click='switchThemes'>切换主题</button>
+    <button @click='startGame'>开始游戏</button>
+    <div style='margin-top: 10px'><span>分数：{{ score }}</span></div>
   </div>
 
   <canvas></canvas>
-  <el-dialog title='提示' width='30%' v-model='overGame'>
+  <el-dialog :show-close='false' :close-on-click-modal='false' :close-on-press-escape='false' title='提示' width='30%' v-model='overGame'>
     <h1>你的分数是：<span >{{score}}</span></h1>
-    <el-button @click='resGame'>重 新 开 始</el-button>
+    <button  @click='resGame'>重 新 开 始</button>
   </el-dialog>
 </template>
 
 <script setup>
 import { ref } from 'vue'
+import {useDark, useToggle} from '@vueuse/core'
 
+const isDark = useDark()
 let score = ref(0)
 let isOver = ref(true)
 let overGame = ref(false)
 
+const switchThemes=()=> {
+  const toggleDark = useToggle(isDark)
+  console.log(toggleDark())
+}
 // 禁止右键
 document.oncontextmenu = function() {
   return false
@@ -254,6 +261,43 @@ body {
   overflow: hidden;
 }
 
+/* From www.lingdaima.com */
+button {
+  --green: #1BFD9C;
+  font-size: 15px;
+  padding: 0.7em 2.7em;
+  letter-spacing: 0.06em;
+  position: relative;
+  font-family: inherit;
+  border-radius: 0.6em;
+  overflow: hidden;
+  transition: all 0.3s;
+  line-height: 1.4em;
+  border: 2px solid var(--green);
+  background: linear-gradient(to right, rgba(27, 253, 156, 0.1) 1%, transparent 40%,transparent 60% , rgba(27, 253, 156, 0.1) 100%);
+  color: var(--green);
+  box-shadow: inset 0 0 10px rgba(27, 253, 156, 0.4), 0 0 9px 3px rgba(27, 253, 156, 0.1);
+}
+
+button:hover {
+  color: #82ffc9;
+  box-shadow: inset 0 0 10px rgba(27, 253, 156, 0.6), 0 0 9px 3px rgba(27, 253, 156, 0.2);
+}
+
+button:before {
+  content: "";
+  position: absolute;
+  left: -4em;
+  width: 4em;
+  height: 100%;
+  top: 0;
+  transition: transform .4s ease-in-out;
+  background: linear-gradient(to right, transparent 1%, rgba(27, 253, 156, 0.1) 40%,rgba(27, 253, 156, 0.1) 60% , transparent 100%);
+}
+
+button:hover:before {
+  transform: translateX(15em);
+}
 
 </style>
 

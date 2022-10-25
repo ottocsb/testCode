@@ -8,5 +8,6 @@ import { createPinia } from 'pinia'
 //element-plus
 import ElementPlus from 'element-plus'
 import 'element-plus/theme-chalk/index.css'
+import 'element-plus/theme-chalk/dark/css-vars.css'
 
 createApp(App).use(createPinia()).use(router).use(ElementPlus).mount('#app')
