@@ -8,6 +8,7 @@
     <!-- 或者使用解构之后的 -->
     <p>{{ counter }}</p>
     <p>{{ store.doubleCount }}</p>
+    <button @click='gaGame'>play-game</button>
   </div>
 </template>
 
@@ -17,6 +18,7 @@ import axios from '../utils/axios'
 import { useStore } from '@/stores/index.ts'
 // 使普通数据变响应式的函数
 import { storeToRefs } from 'pinia'
+import router from '../router'
 
 const store = useStore()
 
@@ -25,12 +27,15 @@ const name = computed(() => store.name)
 // 解构并使数据具有响应式
 const { counter } = storeToRefs(store)
 //箭头函数 click事件
-const handleClick = (res:number,name:string) => {
+const handleClick = (res: number, name: string) => {
   // 修改状态
-  console.log(res,name)
+  console.log(res, name)
   store.$state = { counter: res, name: name }
 }
 
+const gaGame = () => {
+  router.push('/game')
+}
 
 // 点击修改状态数据;
 // function handleClick() {
