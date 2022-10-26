@@ -15,7 +15,7 @@
 <script setup lang='ts'>
 import { computed } from 'vue'
 import axios from '../utils/axios'
-import { useStore } from '@/stores/index.ts'
+import { useStore } from '../stores'
 // 使普通数据变响应式的函数
 import { storeToRefs } from 'pinia'
 import router from '../router'
