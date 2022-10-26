@@ -21,9 +21,8 @@ jobs:
         run: npm run build # 打包
 
       - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v1
+        uses: JamesIves/github-pages-deploy-action@v4.4.1
         with:
           publish_dir: ./dist
-          github_token: ${{ secrets.TEST_CODE }}
+          github_token: ${{ secrets.TEST_CODE}}
           commit_message: Update Vite2.x + Vue3.x + TypeScript Starter
