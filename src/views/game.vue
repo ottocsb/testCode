@@ -12,7 +12,7 @@
   </el-dialog>
 </template>
 
-<script setup>
+<script setup lang='js'>
 import { ref } from 'vue'
 import {useDark, useToggle} from '@vueuse/core'
 
