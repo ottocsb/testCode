@@ -23,6 +23,6 @@ jobs:
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4.4.1
         with:
-          publish_dir: ./dist
+          folder: ./dist
           github_token: ${{ secrets.TEST_CODE}}
           commit_message: Update Vite2.x + Vue3.x + TypeScript Starter
