@@ -14,11 +14,8 @@ jobs:
         with:
           node-version: 16.x
 
-      - name: Install
-        run: npm install # 安装依赖
-
-      - name: Build
-        run: npm run build # 打包
+      - name: Install and Build
+        run: npm install && npm run build 
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4.4.1
