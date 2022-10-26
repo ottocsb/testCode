@@ -20,11 +20,12 @@ jobs:
       - name: Build
         run: npm run build # 打包
 
-      - name: Deploy
-        uses: actions/deploy-pages@v1 # 使用部署到 GitHub pages 的 action
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v1
         with:
-          publish_dir: ./dist # 部署打包后的 dist 目录
-          github_token: ${{ secrets.VUE3_DEPLOY }} # secret 名
+          publish_dir: ./dist
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           user_name: ${{ secrets.MY_USER_NAME }}
           user_email: ${{ secrets.MY_USER_EMAIL }}
-          commit_message: Update Vite2.x + Vue3.x + TypeScript Starter # 部署时的 git 提交信息，自由填写
+          commit_message: Update Vite2.x + Vue3.x + TypeScript Starter
