@@ -15,11 +15,11 @@ jobs:
           node-version: 16.x
 
       - name: Install and Build
-        run: npm install && npm run build 
+        run: npm install && npm run build
 
-      - name: Deploy to GitHub Pages
-        uses: JamesIves/github-pages-deploy-action@v4.4.1
+      - name: GitHub Pages action
+        uses: peaceiris/actions-gh-pages@v3.9.0
         with:
-          folder: ./dist
-          github_token: ${{ secrets.TEST_CODE}}
-          commit_message: Update Vite2.x + Vue3.x + TypeScript Starter
+          github_token: ${{ secrets.TEST_CODE }}
+          publish_dir: ./dist
+
