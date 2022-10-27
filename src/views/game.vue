@@ -25,7 +25,6 @@ const isDark = useDark()
 let score = ref(0)
 let isOver = ref(true)
 let overGame = ref(false)
-localStorage.setItem('maxScore', score.value.toString())
 let maxScore = localStorage.getItem('maxScore')
 
 const switchThemes = () => {
