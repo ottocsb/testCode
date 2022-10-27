@@ -9,15 +9,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Setup Node.js environment
+      - name: Setup Node.js environment # 设置 Node.js 环境
         uses: actions/setup-node@v3.5.1
         with:
           node-version: 16.x
 
-      - name: Install and Build
+      - name: Install and Build # 安装依赖并构建
         run: npm install && npm run build
 
-      - name: GitHub Pages action
+      - name: GitHub Pages action # 部署到 GitHub Pages
         uses: peaceiris/actions-gh-pages@v3.9.0
         with:
           github_token: ${{ secrets.TEST_CODE }}

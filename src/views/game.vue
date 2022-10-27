@@ -2,26 +2,33 @@
   <div v-if='isOver'>
     <button @click='switchThemes'>切换主题</button>
     <button @click='startGame'>开始游戏</button>
-    <div style='margin-top: 10px'><span>分数：{{ score }}</span></div>
+    <div style='margin-top: 10px'>
+      <span v-if='maxScore>0'>历史最高分：{{ maxScore }}</span>
+      <span v-else>分数：{{ score }}</span>
+    </div>
   </div>
 
   <canvas></canvas>
-  <el-dialog :show-close='false' :close-on-click-modal='false' :close-on-press-escape='false' title='提示' width='30%' v-model='overGame'>
-    <h1>你的分数是：<span >{{score}}</span></h1>
-    <button  @click='resGame'>重 新 开 始</button>
+  <el-dialog v-model='overGame' :close-on-click-modal='false' :close-on-press-escape='false' :show-close='false'
+             title='提示'
+             width='30%'>
+    <h1>你的分数是：<span>{{ score }}</span></h1>
+    <button @click='resGame'>重 新 开 始</button>
   </el-dialog>
 </template>
 
 <script setup>
 import { ref } from 'vue'
-import {useDark, useToggle} from '@vueuse/core'
+import { useDark, useToggle } from '@vueuse/core'
 
 const isDark = useDark()
 let score = ref(0)
 let isOver = ref(true)
 let overGame = ref(false)
+localStorage.setItem('maxScore', score.value.toString())
+let maxScore = localStorage.getItem('maxScore')
 
-const switchThemes=()=> {
+const switchThemes = () => {
   const toggleDark = useToggle(isDark)
   console.log(toggleDark())
 }
@@ -43,6 +50,7 @@ const startGame = () => {
   let winH = window.innerHeight
   canvas.width = winW
   canvas.height = winH
+
   // 通用属性
   class Item {
     constructor(x, y, radius, color, velocity) {
@@ -130,6 +138,7 @@ const startGame = () => {
 
 
   let flag = true
+
   // 动画
 
   function animate() {
@@ -213,11 +222,22 @@ const startGame = () => {
     // 添加到数组里
     bulletArray.push(new Bullet(canvas.width / 2, canvas.height / 2, 5, 'white', velocity))
   })
-  // 敌人
-  setInterval(() => {
+  let time = 0 // 计时器
+  let num = 2000 // 初始间隔时间
+  let blood = 20 // 初始血量基数
+  const enemy = function() {
+    clearInterval(interval)
+    time++
+    if (time === 20) {
+      num /= 1.15
+      blood += 7
+      time = 0
+    }
+    console.log(num, time, blood)
     if (!flag) return
     // 随机大小
-    let radius = Math.random() * (35 - 15) + 15
+    let radius = Math.random() * (blood) + 15
+
     // 随机颜色
     let color = `hsl(${Math.random() * 360}, 50%, 50%)`
     let x, y
@@ -235,11 +255,41 @@ const startGame = () => {
       y: Math.sin(angle) * 2.5
     }
     eleArray.push(new Ele(x, y, radius, color, velocity))
-  }, 2000)
+    interval = setInterval(enemy, num)
+  }
+
+  let interval = setTimeout(enemy, num)
+
+  // 敌人
+  // setInterval(() => {
+  //   if (!flag) return
+  //   // 随机大小
+  //   let radius = Math.random() * (35 - 15) + 15
+  //   // 随机颜色
+  //   let color = `hsl(${Math.random() * 360}, 50%, 50%)`
+  //   let x, y
+  //   // 随机位置
+  //   if (Math.random() < 0.5) {
+  //     x = Math.random() < 0.5 ? 0 - radius : canvas.width + radius
+  //     y = Math.random() * canvas.height + radius
+  //   } else {
+  //     x = Math.random() * canvas.width + radius
+  //     y = Math.random() < 0.5 ? 0 - radius : canvas.height + radius
+  //   }
+  //   let angle = Math.atan2(canvas.height / 2 - y, canvas.width / 2 - x)
+  //   let velocity = {
+  //     x: Math.cos(angle) * 2.5,
+  //     y: Math.sin(angle) * 2.5
+  //   }
+  //   eleArray.push(new Ele(x, y, radius, color, velocity))
+  // }, 2000)
 
 }
 const resGame = () => {
   overGame.value = false
+  if (localStorage.getItem('maxScore') < score.value) {
+    localStorage.setItem('maxScore', score.value.toString())
+  }
   score.value = 0
   startGame()
 }
@@ -274,7 +324,7 @@ button {
   transition: all 0.3s;
   line-height: 1.4em;
   border: 2px solid var(--green);
-  background: linear-gradient(to right, rgba(27, 253, 156, 0.1) 1%, transparent 40%,transparent 60% , rgba(27, 253, 156, 0.1) 100%);
+  background: linear-gradient(to right, rgba(27, 253, 156, 0.1) 1%, transparent 40%, transparent 60%, rgba(27, 253, 156, 0.1) 100%);
   color: var(--green);
   box-shadow: inset 0 0 10px rgba(27, 253, 156, 0.4), 0 0 9px 3px rgba(27, 253, 156, 0.1);
 }
@@ -292,7 +342,7 @@ button:before {
   height: 100%;
   top: 0;
   transition: transform .4s ease-in-out;
-  background: linear-gradient(to right, transparent 1%, rgba(27, 253, 156, 0.1) 40%,rgba(27, 253, 156, 0.1) 60% , transparent 100%);
+  background: linear-gradient(to right, transparent 1%, rgba(27, 253, 156, 0.1) 40%, rgba(27, 253, 156, 0.1) 60%, transparent 100%);
 }
 
 button:hover:before {

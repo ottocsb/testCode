@@ -22,6 +22,10 @@ import router from '../router'
 
 const store = useStore()
 
+let a: number = 1
+let b: [number, string?] = [1, '2']
+console.log(a, b)
+
 // 结合computed获取
 const name = computed(() => store.name)
 // 解构并使数据具有响应式
@@ -47,9 +51,18 @@ const gaGame = () => {
 //   }, 1000)
 // }
 
-let a: number = 1
-let b: [number, string?] = [1, '2']
-console.log(a, b)
+// 定时器的使用 可动态更改间隔
+// let num:number = 1000;
+// let time: number = 1
+// const myFunction = function(){
+//   clearInterval(interval);
+//   time++
+//   if(time==10)(num=2000)
+//   interval = setInterval(myFunction, num);
+//   console.log(time);
+// }
+// //var interval = setInterval(myFunction, counter);//用setTimeout代替
+// let interval = setTimeout(myFunction, num);
 
 axios
   .get('/users/XPoet')
