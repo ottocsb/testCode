@@ -16,7 +16,8 @@
           :key='`food${index}`'
           :style='location(item.x, item.y)'
           class='food'
-        ><img alt='' src='src/assets/苹果.png' style='width: 16px;height: 16px' /></div>
+        ><img alt='' src='https://cdn.staticaly.com/gh/ottocsb/image-upload@master/苹果.2i4srrsw3zc0.webp'
+              style='width: 16px;height: 16px' /></div>
       </div>
 
 
