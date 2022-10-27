@@ -16,8 +16,8 @@
           :key='`food${index}`'
           :style='location(item.x, item.y)'
           class='food'
-        ><img alt='' src='../assets/苹果.png' /></div>
-              style='width: 16px;height: 16px' /></div>
+        ><img alt='' src='../assets/苹果.png' style='width: 16px;height: 16px' />
+        </div>
       </div>
 
 
