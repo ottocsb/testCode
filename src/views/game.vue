@@ -14,20 +14,24 @@
              width='30%'>
     <h1>你的分数是：<span>{{ score }}</span></h1>
     <button @click='resGame'>重 新 开 始</button>
+    <button @click='goHome'>回到首页</button>
   </el-dialog>
 </template>
 
 <script setup>
 import { ref } from 'vue'
 import { useDark, useToggle } from '@vueuse/core'
+import router from '@/router/index.js'
 
 const isDark = useDark()
 let score = ref(0)
 let isOver = ref(true)
 let overGame = ref(false)
-localStorage.setItem('maxScore', score.value.toString())
 let maxScore = localStorage.getItem('maxScore')
 
+const goHome = () => {
+  router.push('/home')
+}
 const switchThemes = () => {
   const toggleDark = useToggle(isDark)
   console.log(toggleDark())
