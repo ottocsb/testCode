@@ -21,7 +21,7 @@
 <script setup>
 import { ref } from 'vue'
 import { useDark, useToggle } from '@vueuse/core'
-import router from '@/router/index.js'
+import router from '../router'
 
 const isDark = useDark()
 let score = ref(0)
@@ -30,7 +30,7 @@ let overGame = ref(false)
 let maxScore = localStorage.getItem('maxScore')
 
 const goHome = () => {
-  router.push('/home')
+  router.push('/')
 }
 const switchThemes = () => {
   const toggleDark = useToggle(isDark)
@@ -154,6 +154,7 @@ const startGame = () => {
     let player = new Player(canvas.width / 2, canvas.height / 2, 20, 'white')
     // 遍历子弹
     bulletArray.map((item, index) => {
+      console.log(item, index)
       item.ai()
       // 删除
       if (item.x <= 0 - item.radius || item.y <= 0 - item.radius || item.x >= canvas.width || item.y >= canvas.height) {
