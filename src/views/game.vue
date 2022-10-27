@@ -1,6 +1,5 @@
 <template>
   <div v-if='isOver'>
-    <button @click='switchThemes'>切换主题</button>
     <button @click='startGame'>开始游戏</button>
     <div style='margin-top: 10px'>
       <span v-if='maxScore>0'>历史最高分：{{ maxScore }}</span>
@@ -19,23 +18,17 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
-import { useDark, useToggle } from '@vueuse/core'
 import router from '../router'
 
-const isDark = useDark()
-let score = ref(0)
-let isOver = ref(true)
-let overGame = ref(false)
+let score = $ref(0)
+let isOver = $ref(true)
+let overGame = $ref(false)
 let maxScore = localStorage.getItem('maxScore')
 
 const goHome = () => {
   router.push('/')
 }
-const switchThemes = () => {
-  const toggleDark = useToggle(isDark)
-  console.log(toggleDark())
-}
+
 // 禁止右键
 document.oncontextmenu = function() {
   return false
@@ -46,7 +39,7 @@ document.addEventListener('selectstart', function(e) {
 })
 // 开始游戏
 const startGame = () => {
-  isOver.value = false
+  isOver = false
   let canvas = document.querySelector('canvas')
   let ctx = canvas.getContext('2d')
   // 设置canvas宽高
@@ -177,11 +170,11 @@ const startGame = () => {
           if (ele.radius - 16 > 10) {
             ele.radius -= 16
             bulletArray.splice(index, 1)
-            score.value += 100
+            score += 100
           } else {
             bulletArray.splice(index, 1)
             eleArray.splice(i, 1)
-            score.value += 250
+            score += 250
           }
 
         }
@@ -195,7 +188,7 @@ const startGame = () => {
       let dist = Math.hypot(player.x - item.x, player.y - item.y)
       if (dist - item.radius - player.radius < 1) {
         flag = false
-        overGame.value = true
+        overGame = true
         console.log('游戏结束')
       }
 
@@ -291,11 +284,11 @@ const startGame = () => {
 
 }
 const resGame = () => {
-  overGame.value = false
-  if (localStorage.getItem('maxScore') < score.value) {
-    localStorage.setItem('maxScore', score.value.toString())
+  overGame = false
+  if (localStorage.getItem('maxScore') < score) {
+    localStorage.setItem('maxScore', score.toString())
   }
-  score.value = 0
+  score = 0
   startGame()
 }
 

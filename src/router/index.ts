@@ -15,7 +15,12 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/game',
     name: 'game',
-    component: () => import('@/views/game.vue') // 懒加载组件
+    component: () => import('@/views/game.vue')
+  },
+  {
+    path: '/snake',
+    name: 'snake',
+    component: () => import('@/views/snake.vue')
   }
 ]
 
