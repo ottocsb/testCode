@@ -21,6 +21,11 @@ const routes: Array<RouteRecordRaw> = [
     path: '/snake',
     name: 'snake',
     component: () => import('@/views/snake.vue')
+  },
+  {
+    path: '/ocr',
+    name: 'ocr',
+    component: () => import('@/views/ocr.vue')
   }
 ]
 

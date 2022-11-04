@@ -20,7 +20,6 @@
         </div>
       </div>
 
-
       <!-- 结束面板 -->
       <div v-if='showFail' class='fail'>
         <div class='fail-title'>游戏结束!</div>

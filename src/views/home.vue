@@ -10,6 +10,7 @@
     <p>{{ store.doubleCount }}</p>
     <button @click='goGame'>play-game</button>
     <button @click='goSnake'>play-snake</button>
+    <button @click='goOcr'>go-ocr</button>
   </div>
 </template>
 
@@ -44,6 +45,9 @@ const goGame = () => {
 }
 const goSnake = () => {
   router.push('/snake')
+}
+const goOcr = () => {
+  router.push('/ocr')
 }
 
 // 点击修改状态数据;
